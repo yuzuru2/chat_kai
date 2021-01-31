@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".write": false,
+    ".read": false,
+    "broadcast": {
+      "$uid": {
+        ".read": "auth.uid === $uid"
+      },
+      ".indexOn": ["uid"]
+    },
+    "talks": {
+      "$bid": {
+        ".indexOn": "createdAt"
+      }
+    }
+  }
+}

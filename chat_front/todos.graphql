@@ -1,0 +1,83 @@
+query lounge {
+  lounge {
+    url
+    lounge {
+      rid
+      rname
+      limit
+      uid
+      uname
+      icon
+      createdAt
+    }
+  }
+}
+
+query talk {
+  talk {
+    url
+    talk {
+      createdAt
+      uid
+      icon
+      uname
+      message
+      kind
+    }
+    info {
+      limit
+      createdAt
+      hostid
+      rname
+      rid
+      uid
+      uname
+      icon
+      updatedAt
+    }
+  }
+}
+
+query get_place {
+  get_place
+}
+
+mutation login($uname: String!, $icon: Int!) {
+  login(uname: $uname, icon: $icon)
+}
+
+mutation logout {
+  logout
+}
+
+mutation create_room($rname: String!, $limit: Int!) {
+  create_room(rname: $rname, limit: $limit)
+}
+
+mutation join_room($rid: String!) {
+  join_room(rid: $rid)
+}
+
+mutation exit_room {
+  exit_room
+}
+
+mutation create_talk($message: String!, $kind: Int!) {
+  create_talk(message: $message, kind: $kind)
+}
+
+mutation create_blacklist($bid: String!) {
+  create_blacklist(bid: $bid)
+}
+
+mutation update_host($transfer: String!) {
+  update_host(transfer: $transfer)
+}
+
+mutation update_rname($rname: String!) {
+  update_rname(rname: $rname)
+}
+
+mutation update_limit($limit: Int!) {
+  update_limit(limit: $limit)
+}

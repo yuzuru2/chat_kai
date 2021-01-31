@@ -1,0 +1,56 @@
+get_uid
+broadcast
+
+// 部屋作成
+create_room
+
+// 入室
+join_room
+
+// 退室
+exit_room
+
+// ブラックリスト作成
+create_blacklist
+
+// 上限変更
+update_limit
+
+// 部屋名変更
+update_rname
+
+// ホスト変更
+update_host 
+
+// 部屋にいるか
+check_user
+
+// ラウンジ一覧
+get_lounge
+
+// 部屋情報
+get_room_info
+
+// ユーザ作成
+create_user
+
+// ユーザ削除
+delete_user
+
+// ユーザ作成されているか
+find_user
+
+// トーク追加
+create_talk
+
+// トーク一覧
+find_talk
+
+// どこにいるか
+get_place
+
+// ridをセット
+update_rid
+
+// トーク削除
+delete_talk
