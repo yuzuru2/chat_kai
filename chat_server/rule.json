@@ -3,8 +3,8 @@
     ".write": false,
     ".read": false,
     "broadcast": {
-      "$uid": {
-        ".read": "auth.uid === $uid"
+      "$id": {
+        ".read": "auth != null"
       },
       ".indexOn": ["uid"]
     },
