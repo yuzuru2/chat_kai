@@ -17,16 +17,12 @@ export const State = {
     key: counter.count,
     default: false,
   }),
-  icon: atom({
+  uid: atom({
     key: counter.count,
-    default: 0,
+    default: '',
   }),
   talk: atom({
     key: counter.count,
     default: [] as T_Talk[],
-  }),
-  uid: atom({
-    key: counter.count,
-    default: '',
   }),
 };

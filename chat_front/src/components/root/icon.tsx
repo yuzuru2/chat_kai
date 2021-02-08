@@ -1,31 +1,34 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
+
 import { Constant } from '../../constant';
-import { useRecoilState } from 'recoil';
-import { State } from '../../recoil';
 
 export const Icon = () => {
-  const [icon, setIcon] = useRecoilState(State.icon);
+  const { register, setValue } = useFormContext();
+  const [icon, setIcon] = React.useState(0);
 
-  return React.useMemo(() => {
-    return (
-      <>
-        {[...Array(Constant.icon_number)].map((_, i) => {
-          return (
-            <li style={{ margin: 3 }} key={i}>
-              <img
-                src={`/img/${i}.png`}
-                alt=""
-                width="52"
-                style={{
-                  background: Constant.icon_colors[i],
-                  opacity: icon === i ? 1.0 : 0.3,
-                }}
-                onClick={() => setIcon(i)}
-              />
-            </li>
-          );
-        })}
-      </>
-    );
-  }, [icon, setIcon]);
+  return (
+    <>
+      <input type="hidden" name="icon" ref={register({ required: true })} />
+      {[...Array(Constant.icon_number)].map((_, i) => {
+        return (
+          <li style={{ margin: 3 }} key={i}>
+            <img
+              src={`/img/${i}.png`}
+              alt=""
+              width="52"
+              style={{
+                background: Constant.icon_colors[i],
+                opacity: icon === i ? 1.0 : 0.3,
+              }}
+              onClick={() => {
+                setIcon(i);
+                setValue('icon', i);
+              }}
+            />
+          </li>
+        );
+      })}
+    </>
+  );
 };

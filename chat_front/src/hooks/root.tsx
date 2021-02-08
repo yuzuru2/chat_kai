@@ -4,11 +4,18 @@ import { Constant } from '../constant';
 import { State } from '../recoil';
 import { useLoginMutation, useGet_PlaceQuery } from '../types.d';
 
+type FormState = {
+  name: string;
+  icon: number;
+};
+
 export const useRootHooks = () => {
-  const methods = useForm();
+  const methods = useForm<FormState>({
+    mode: 'onChange',
+    defaultValues: { name: '', icon: 0 },
+  });
 
   const [, setGlobalLoading] = useRecoilState(State.loading);
-  const [icon] = useRecoilState(State.icon);
 
   const [login] = useLoginMutation({
     onCompleted: () => {
@@ -18,14 +25,14 @@ export const useRootHooks = () => {
 
   const { data, loading } = useGet_PlaceQuery();
 
-  const on_submit = async (data: { name: string }) => {
+  const on_submit = async (data: FormState) => {
     setGlobalLoading(true);
     const _name = data.name;
     methods.reset();
 
     login({
       variables: {
-        icon: icon,
+        icon: Number(data.icon),
         uname: _name,
       },
     });
