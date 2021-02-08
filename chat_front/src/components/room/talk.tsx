@@ -1,10 +1,11 @@
 import React from 'react';
-
-import { uid } from '../../';
-import { T_Talk } from '../../types';
-
 import * as _ from 'lodash';
 import moment from 'moment';
+import { useRecoilState } from 'recoil';
+
+import { T_Talk } from '../../types';
+import { State } from '../../recoil';
+
 moment.locale('ja');
 
 const reactStringReplace = require('react-string-replace');
@@ -102,6 +103,8 @@ const right = (data: T_Data) => {
 };
 
 export const Talk = (params: { talk: T_Talk[] }) => {
+  const [uid] = useRecoilState(State.uid);
+
   return React.useMemo(() => {
     const data = _.orderBy(
       params.talk.map(m => {
@@ -135,5 +138,5 @@ export const Talk = (params: { talk: T_Talk[] }) => {
     });
 
     return <>{html}</>;
-  }, [params.talk]);
+  }, [params.talk, uid]);
 };

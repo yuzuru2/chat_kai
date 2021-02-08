@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { uid } from '../../';
 import { useRecoilState } from 'recoil';
 import { State } from '../../recoil';
 import { useRoomHooks } from '../../hooks/room';
@@ -15,14 +14,17 @@ type LimitState = {
 };
 
 export const DetailModal = () => {
-  const [room] = useRecoilState(State.room);
+  const [uid] = useRecoilState(State.uid);
 
   const {
     update_host,
     update_limit,
     update_rname,
     create_blaclkist,
+    data,
   } = useRoomHooks();
+
+  const room = data?.talk?.info as T_Room[];
 
   const form_rname = {
     form: useForm<RnameState>({

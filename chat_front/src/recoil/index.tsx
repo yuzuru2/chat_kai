@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { T_Lounge, T_Talk, T_Room } from '../types';
+import { T_Talk } from '../types';
 
 class Counter {
   private _count: number = 0;
@@ -21,16 +21,12 @@ export const State = {
     key: counter.count,
     default: 0,
   }),
-  lounge: atom({
-    key: counter.count,
-    default: [] as T_Lounge[],
-  }),
   talk: atom({
     key: counter.count,
     default: [] as T_Talk[],
   }),
-  room: atom({
+  uid: atom({
     key: counter.count,
-    default: [] as T_Room[],
+    default: '',
   }),
 };

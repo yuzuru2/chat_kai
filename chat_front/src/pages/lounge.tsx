@@ -1,21 +1,22 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+
 import { Header } from '../components/lounge/header';
-import { useLoungeHooks } from '../hooks/lounge';
 import { Loading } from '../components/loading';
-import { Constant } from '../constant';
 import { Section } from '../components/lounge/section';
+
+import { useLoungeHooks } from '../hooks/lounge';
 import { State } from '../recoil';
-import { T_Lounge } from '../types';
 import { firebase } from '../firebase';
-import { uid } from '../';
+import { Constant } from '../constant';
 
 export const Lounge = () => {
   const [global_loading, setGlobalLoading] = useRecoilState(State.loading);
+  const [uid] = useRecoilState(State.uid);
+
   const history = useHistory();
   const { data, loading } = useLoungeHooks();
-  const [, setLounge] = useRecoilState(State.lounge);
 
   React.useEffect(() => {
     if (data?.lounge == null) {
@@ -27,9 +28,7 @@ export const Lounge = () => {
         ? history.push('/')
         : history.push(`/${Constant.place.room}`);
     }
-
-    setLounge(data.lounge.lounge as T_Lounge[]);
-  }, [data, history, setLounge]);
+  }, [data, history]);
 
   React.useEffect(() => {
     firebase
@@ -50,7 +49,7 @@ export const Lounge = () => {
           return;
         }
       });
-  }, [history]);
+  }, [history, uid]);
 
   React.useEffect(() => {
     return () => {

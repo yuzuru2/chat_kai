@@ -1,14 +1,18 @@
 import React from 'react';
 import * as _ from 'lodash';
 import { useRecoilState } from 'recoil';
-import { useLoungeHooks } from '../../hooks/lounge';
-import { State } from '../../recoil';
+
 import { MemberModal } from './memberModal';
 
+import { useLoungeHooks } from '../../hooks/lounge';
+import { State } from '../../recoil';
+import { T_Lounge } from '../../types';
+
 export const Info = () => {
-  const [lounge] = useRecoilState(State.lounge);
   const [, setGlobalLoading] = useRecoilState(State.loading);
-  const { join_room } = useLoungeHooks();
+  const { join_room, data } = useLoungeHooks();
+
+  const lounge = data?.lounge?.lounge as T_Lounge[];
 
   return React.useMemo(() => {
     const tmp = _.orderBy(
@@ -16,7 +20,7 @@ export const Info = () => {
         return {
           ...m,
           rid: m.rid as string,
-          createdAt: Number(m.createdAt),
+          createdAt: Number(m?.createdAt),
         };
       }),
       'createdAt',
